@@ -1,0 +1,5 @@
+code/test_rle
+code/compression_demo
+code/test_rle_asan
+*.o
+*.dSYM/
