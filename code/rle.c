@@ -28,10 +28,11 @@ size_t rle_encode(const uint8_t *in, size_t n, uint8_t *out) {
 }
 
 // Safe decode. Checks that we never write past "out_cap".
-// Decodes complete pairs. Returns (size_t) -1 if output space runs out.
+// Returns bytes written, or (size_t) -1 if the input is bad.
 size_t rle_decode_safe(const uint8_t *in, size_t n, uint8_t *out, size_t out_cap) {
+    if (n % 2 != 0) return (size_t) -1;   // pairs only
     size_t o = 0;
-    for (size_t i = 0; n - i >= 2; i += 2) {
+    for (size_t i = 0; i < n; i += 2) {
         uint8_t count = in[i];
         if (count > out_cap - o) return (size_t) -1;  // would overflow
         memset(out + o, in[i + 1], count);

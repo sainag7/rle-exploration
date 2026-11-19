@@ -98,6 +98,14 @@ int main(void) {
         printf("PASS  too-big count is rejected\n");
     }
 
+    // bad input: odd length
+    {
+        uint8_t odd[3] = {1, 'a', 2};
+        uint8_t out[10];
+        assert(rle_decode_safe(odd, 3, out, sizeof out) == (size_t) -1);
+        printf("PASS  odd-length input is rejected\n");
+    }
+
     printf("\nAll tests passed.\n");
     return 0;
 }
