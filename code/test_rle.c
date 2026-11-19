@@ -78,6 +78,12 @@ int main(void) {
     // no repeats at all (gets bigger!)
     round_trip((const uint8_t *) "ABCD", 4, "ABCD (no repeats)");
 
+    const uint8_t binary_data[] = {'A', 0, 0, 'B'};
+    const uint8_t binary_encoding[] = {1, 'A', 2, 0, 1, 'B'};
+    check_encoding(binary_data, sizeof binary_data, binary_encoding,
+                   sizeof binary_encoding);
+    round_trip(binary_data, sizeof binary_data, "embedded zero bytes");
+
     // runs around the 255 limit
     int sizes[] = {254, 255, 256, 300, 1000};
     for (int s = 0; s < 5; s++) {
