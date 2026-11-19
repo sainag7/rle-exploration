@@ -6,18 +6,16 @@
 #include "rle.h"
 
 // Encode. "out" needs room for 2 * n bytes (worst case).
-// Returns bytes written, or (size_t) -1 if a run exceeds 255 bytes.
+// Returns how many bytes were written.
 size_t rle_encode(const uint8_t *in, size_t n, uint8_t *out) {
     size_t o = 0;
     size_t i = 0;
     while (i < n) {
         uint8_t value = in[i];
         size_t run = 1;
-        while (i + run < n && in[i + run] == value) {
+        // count repeats, but stop at 255 because count is one byte
+        while (i + run < n && in[i + run] == value && run < 255) {
             run++;
-        }
-        if (run > UINT8_MAX) {
-            return (size_t) -1;
         }
         out[o++] = (uint8_t) run;
         out[o++] = value;

@@ -32,6 +32,25 @@ int main(void) {
     check_encoding((const uint8_t *) "ABCD", 4, no_repeats, sizeof no_repeats);
     puts("PASS  four distinct bytes expand to eight bytes");
 
+    uint8_t repeated[300];
+    memset(repeated, 'x', sizeof repeated);
+
+    const uint8_t below_limit[] = {254, 'x'};
+    check_encoding(repeated, 254, below_limit, sizeof below_limit);
+    puts("PASS  254 repeated bytes fit in one pair");
+
+    const uint8_t at_limit[] = {255, 'x'};
+    check_encoding(repeated, 255, at_limit, sizeof at_limit);
+    puts("PASS  255 repeated bytes fit in one pair");
+
+    const uint8_t above_limit[] = {255, 'x', 1, 'x'};
+    check_encoding(repeated, 256, above_limit, sizeof above_limit);
+    puts("PASS  256 repeated bytes split into 255 and 1");
+
+    const uint8_t long_run[] = {255, 'x', 45, 'x'};
+    check_encoding(repeated, 300, long_run, sizeof long_run);
+    puts("PASS  300 repeated bytes split into 255 and 45");
+
     puts("All encoder tests passed.");
     return 0;
 }
