@@ -35,5 +35,13 @@ int main(void) {
     memset(zeros, 0, sizeof zeros);
     show("1000 zero bytes", zeros, sizeof zeros);
 
+    // 3. Normal text (almost no repeats)
+    const char *text = "the quick brown fox jumps over the lazy dog";
+    show("a normal sentence", (const uint8_t *) text, strlen(text));
+
+    // 4. A repeating pattern (no runs, so RLE can't see it)
+    const char *pattern = "ABABABABABABABAB";
+    show("ABAB... pattern", (const uint8_t *) pattern, strlen(pattern));
+
     return 0;
 }
