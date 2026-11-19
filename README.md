@@ -83,6 +83,7 @@ ABAB... pattern                 16 ->    32 bytes  (200.0% of original)
 | `code/test_rle.c` | Test cases, including edge cases (empty input, 255, 256, bad input) |
 | `code/compression_demo.c` | Prints the compression numbers above |
 | `resources.md` | Resources I used |
+| `reflection.md` | How I used AI to study this |
 
 ## Ideas for next steps
 
