@@ -82,6 +82,7 @@ ABAB... pattern                 16 ->    32 bytes  (200.0% of original)
 | `code/rle.c`, `code/rle.h` | The encoder and safe decoder |
 | `code/test_rle.c` | Test cases, including edge cases (empty input, 255, 256, bad input) |
 | `code/compression_demo.c` | Prints the compression numbers above |
+| [`slides/`](slides/) | PowerPoint decks and speaking script |
 | `resources.md` | Resources I used |
 | `reflection.md` | How I used AI to study this |
 
